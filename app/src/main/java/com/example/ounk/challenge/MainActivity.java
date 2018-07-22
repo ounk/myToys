@@ -75,21 +75,21 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Navigation navTest = (Navigation) adapterView.getItemAtPosition(i);
-                switch (navTest.getType()) {
+                Navigation currentNavItem = (Navigation) adapterView.getItemAtPosition(i);
+                switch (currentNavItem.getType()) {
                     case TYPE_Section:
                         break;
                     case TYPE_Node:
                         navList.clear();
-                        navList = AddEntry(navList, navTest.getChildren());
+                        navList = AddEntry(navList, currentNavItem.getChildren());
                         nAdapter.notifyDataSetChanged();
                         TextView textView = findViewById(R.id.drawer_header);
-                        textView.setText(navTest.getName());
+                        textView.setText(currentNavItem.getName());
                         (findViewById(R.id.back)).setVisibility(View.VISIBLE);
                         setPrev(i);
                         break;
                     case TYPE_Link:
-                        webView.loadUrl(navTest.getLink());
+                        webView.loadUrl(currentNavItem.getLink());
                         mDrawerLayout.closeDrawers();
                         break;
                 }
